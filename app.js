@@ -7,11 +7,12 @@ var app = new Vue({
         notice: '',
         selectedChapterIndex: null,
         sentences: [],
-        started: false
+        started: false,
+        specialCharacters: ['ü', 'ä', 'ö', 'ß']
     },
     mounted: function() {
-        this.selectedChapterIndex = 0;
-        this.start();
+        //this.selectedChapterIndex = 0;
+        //this.start();
     },
     methods: {
         start: function() {
@@ -25,13 +26,17 @@ var app = new Vue({
         },
         next: function() {
             var correctAnswer = this.sentences[this.currentItemIndex]['de'];
-            if (this.answer === correctAnswer) {
+            console.log($.diff('Hallo', 'Halo'));
+            if ($.trim(this.answer) === $.trim(correctAnswer)) {
                 this.notice = '<p class="alert alert-success">Goed!</p>';
             } else {
                 this.notice = '<p class="alert alert-danger">Fout, het moest zijn: <strong>' + correctAnswer + '</strong></p>';
             }
             this.currentItemIndex++;
             this.answer = '';
+        },
+        addCharacter: function(character) {
+            this.answer += character;
         }
     }
 });

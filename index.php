@@ -11,12 +11,19 @@ require_once 'init.php';
     </head>
     <body>
         <div id="app" class="container-fluid mt-3">
-            <div v-if="!started" class="row">
-                <p>Kies een les:</p>
-                <select v-model="selectedChapterIndex">
-                    <option v-for="(chapter, index) in chapters" v-bind:value="index">{{ chapter.title }}</option>
-                </select>
-                <button v-on:click="start()">Start</button>
+            <div v-if="!started">
+                <div class="row">
+                    <div class="col">
+                        <select v-model="selectedChapterIndex" class="selectpicker">
+                            <option v-for="(chapter, index) in chapters" v-bind:value="index">{{ chapter.title }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button v-on:click="start()" class="btn btn-primary mt-3">Start</button>
+                    </div>
+                </div>
             </div>
             <div v-if="started">
                 <div v-html="notice"></div>
@@ -32,8 +39,24 @@ require_once 'init.php';
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button v-on:click="next()" class="btn btn-primary">Antwoord controleren</button>
-                        <button v-on:click="toStartScreen()" class="btn btn-secondary">Opnieuw beginnen</button>
+                        <button
+                            v-for="specialCharacter in specialCharacters"
+                            v-on:click="addCharacter(specialCharacter)"
+                            type="button"
+                            class="btn btn-light mr-2"
+                        >
+                            {{ specialCharacter }}
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button v-on:click="next()" class="btn btn-primary btn-lg mt-3">Antwoord controleren</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button v-on:click="toStartScreen()" class="btn btn-secondary btn-sm mt-3">Opnieuw beginnen</button>
                     </div>
                 </div>
             </div>
@@ -42,7 +65,7 @@ require_once 'init.php';
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script type="text/javascript">
-            var chapters = <?php echo json_encode($formatted); ?>
+            var chapters = <?php echo json_encode($formatted); ?>;
         </script>
         <script src="app.js"></script>
     </body>
