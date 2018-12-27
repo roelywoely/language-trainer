@@ -9,6 +9,10 @@ var app = new Vue({
         sentences: [],
         started: false
     },
+    mounted: function() {
+        this.selectedChapterIndex = 0;
+        this.start();
+    },
     methods: {
         start: function() {
             this.started = true;
@@ -17,13 +21,14 @@ var app = new Vue({
         toStartScreen: function() {
             this.selectedChapterIndex = null;
             this.started = false;
+            this.notice = '';
         },
         next: function() {
             var correctAnswer = this.sentences[this.currentItemIndex]['de'];
             if (this.answer === correctAnswer) {
-                this.notice = 'Goed!';
+                this.notice = '<p class="alert alert-success">Goed!</p>';
             } else {
-                this.notice = 'Fout, het moest zijn: ' + correctAnswer;
+                this.notice = '<p class="alert alert-danger">Fout, het moest zijn: <strong>' + correctAnswer + '</strong></p>';
             }
             this.currentItemIndex++;
             this.answer = '';
