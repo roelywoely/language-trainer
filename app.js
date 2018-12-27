@@ -26,7 +26,6 @@ var app = new Vue({
         },
         next: function() {
             var correctAnswer = this.sentences[this.currentItemIndex]['de'];
-            console.log($.diff('Hallo', 'Halo'));
             if ($.trim(this.answer) === $.trim(correctAnswer)) {
                 this.notice = '<p class="alert alert-success">Goed!</p>';
             } else {

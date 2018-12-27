@@ -1,9 +1,10 @@
 <?php
-$formatted = getFormattedData();
-function getFormattedData() {
+$chapters = getChapters();
+d($chapters);
+function getChapters() {
     $response = file_get_contents('https://docs.google.com/spreadsheets/d/e/2PACX-1vS2k-Y_zTl8sss7-w5cOBaAh4jTNP7q_vwQk-IvIyXEtv134RKXQkvs3izOiwmYiBSILc1aB8ySL-1p/pub?gid=0&single=true&output=csv');
     $rows = explode("\n", $response);
-    $formatted = [];
+    $chapters = [];
     foreach ($rows as $index => $row) {
         if ($index === 0) {
             continue;
@@ -11,7 +12,7 @@ function getFormattedData() {
         $columns = str_getcsv($row);
 
         if (!empty($columns[0])) {
-            $formatted[] = [
+            $chapters[] = [
                 'title' => $columns[0],
                 'sentences' => [],
             ];
@@ -21,10 +22,14 @@ function getFormattedData() {
             'nl' => trim($columns[2]),
             'de' => trim($columns[3]),
         ];
-        $formatted[count($formatted)-1]['sentences'][] = $sentence;
+        $chapters[count($chapters)-1]['sentences'][] = $sentence;
     }
 
-    return $formatted;
+    foreach ($chapters as &$chapter) {
+        shuffle($chapter['sentences']);
+    }
+
+    return $chapters;
 }
 
 function d($var) {
