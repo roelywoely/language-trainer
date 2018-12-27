@@ -1,6 +1,5 @@
 <?php
 $formatted = getFormattedData();
-
 function getFormattedData() {
     $response = file_get_contents('https://docs.google.com/spreadsheets/d/e/2PACX-1vS2k-Y_zTl8sss7-w5cOBaAh4jTNP7q_vwQk-IvIyXEtv134RKXQkvs3izOiwmYiBSILc1aB8ySL-1p/pub?gid=0&single=true&output=csv');
     $rows = explode("\n", $response);
@@ -9,7 +8,7 @@ function getFormattedData() {
         if ($index === 0) {
             continue;
         }
-        $columns = explode(',', $row);
+        $columns = str_getcsv($row);
 
         if (!empty($columns[0])) {
             $formatted[] = [

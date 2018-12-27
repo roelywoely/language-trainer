@@ -8,15 +8,18 @@ require_once 'init.php';
     </head>
     <body>
         <div id="app">
+            <p>{{ notice }}</p>
             <div v-if="!started">
                 <p>Kies een les:</p>
-                <select v-model="selectedChapter">
-                    <option v-for="chapter in chapters" v-bind:value="chapter.title">{{ chapter.title }}</option>
+                <select v-model="selectedChapterIndex">
+                    <option v-for="(chapter, index) in chapters" v-bind:value="index">{{ chapter.title }}</option>
                 </select>
                 <button v-on:click="start()">Start</button>
             </div>
             <div v-if="started">
-                Gestart met {{ selectedChapter }}
+                <p>{{ sentences[currentItemIndex]['nl'] }}</p>
+                <p><input type="text" v-model="answer"></p>
+                <button v-on:click="next()">Verder</button>
                 <button v-on:click="toStartScreen()">Terug</button>
             </div>
         </div>
