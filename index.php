@@ -67,6 +67,6 @@ require_once 'init.php';
         <script type="text/javascript">
             var chapters = <?php echo json_encode($chapters); ?>;
         </script>
-        <script src="app.js"></script>
+        <script src="app.js?<?php echo time(); ?>"></script>
     </body>
 </html>

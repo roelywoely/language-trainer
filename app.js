@@ -16,8 +16,11 @@ var app = new Vue({
     },
     methods: {
         start: function() {
-            this.started = true;
-            this.sentences = this.chapters[this.selectedChapterIndex]['sentences'];
+            var chapter = this.chapters[this.selectedChapterIndex];
+            if (typeof chapter !== 'undefined') {
+                this.started = true;
+                this.sentences = chapter['sentences'];
+            }
         },
         toStartScreen: function() {
             this.selectedChapterIndex = null;
@@ -26,7 +29,7 @@ var app = new Vue({
         },
         next: function() {
             var correctAnswer = this.sentences[this.currentItemIndex]['de'];
-            if ($.trim(this.answer) === $.trim(correctAnswer)) {
+            if (cleanupAnswer(this.answer) === cleanupAnswer(correctAnswer)) {
                 this.notice = '<p class="alert alert-success">Goed!</p>';
             } else {
                 this.notice = '<p class="alert alert-danger">Fout, het moest zijn: <strong>' + correctAnswer + '</strong></p>';
@@ -39,3 +42,7 @@ var app = new Vue({
         }
     }
 });
+
+function cleanupAnswer(answer) {
+    return $.trim(answer.replace(/[,\!\.\?]\s*$/, ""));
+}
