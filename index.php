@@ -11,7 +11,7 @@ require_once 'init.php';
     </head>
     <body>
         <div id="app" class="container-fluid mt-3">
-            <div v-if="!started">
+            <div v-if="currentScreen === constants.SCREENS.START">
                 <div class="row">
                     <div class="col">
                         <select v-model="selectedChapterIndex" class="form-control">
@@ -25,7 +25,7 @@ require_once 'init.php';
                     </div>
                 </div>
             </div>
-            <div v-if="started">
+            <div v-if="currentScreen === constants.SCREENS.QUESTION">
                 <div v-html="notice"></div>
                 <div class="row">
                     <div class="col">
@@ -56,7 +56,21 @@ require_once 'init.php';
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button v-on:click="toStartScreen()" class="btn btn-secondary btn-sm mt-3">Opnieuw beginnen</button>
+                        <button v-on:click="reset()" class="btn btn-secondary btn-sm mt-3">Opnieuw beginnen</button>
+                    </div>
+                </div>
+            </div>
+            <div v-if="currentScreen === constants.SCREENS.END">
+                <div v-html="notice"></div>
+                <div class="row">
+                    <div class="col">
+                        <span class="badge badge-success">{{ countCorrect }}&nbsp;goed</span>
+                        <span class="badge badge-danger">{{ countWrong }}&nbsp;fout</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button v-on:click="reset()" class="btn btn-secondary btn-sm mt-3">Opnieuw beginnen</button>
                     </div>
                 </div>
             </div>
