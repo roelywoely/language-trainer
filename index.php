@@ -21,7 +21,7 @@ require_once 'init.php';
                     <div class="col">
                         <select v-model="selectedChapterIndex" class="form-control">
                             <option v-for="(chapter, index) in chapters" v-bind:value="index">
-                                {{ chapter.title }}
+                                {{ chapter.title }} ({{ chapter.sentences.length }} zinnen)
                             </option>
                         </select>
                     </div>
