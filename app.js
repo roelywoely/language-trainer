@@ -15,10 +15,12 @@ var app = new Vue({
         currentItemIndex: 0,
         currentScreen: null,
         notice: '',
+        progressPercentage: 0,
+        progressPercentageWidth: '0%',
         selectedChapterIndex: null,
         sentences: [],
         showSpecialCharacterButtons: null,
-        specialCharacters: ['ü', 'ä', 'ö', 'ß']
+        specialCharacters: ['ü', 'ä', 'ö', 'ß', 'Ü', 'Ä', 'Ö']
     },
     created: function() {
         this.currentScreen = this.constants.SCREENS.START;
@@ -47,11 +49,12 @@ var app = new Vue({
             this.answer = '';
 
 
-            console.log(typeof this.sentences[this.currentItemIndex + 1]);
             if (typeof this.sentences[this.currentItemIndex + 1] == 'undefined') {
                 this.end();
             } else {
                 this.currentItemIndex++;
+                this.progressPercentage = Math.floor((this.currentItemIndex / this.sentences.length) * 100);
+                this.progressPercentageWidth = this.progressPercentage + '%';
             }
         },
         reset: function() {
@@ -60,6 +63,8 @@ var app = new Vue({
             this.notice = '';
             this.countCorrect = 0;
             this.countWrong = 0;
+            this.progressPercentage = 0;
+            this.progressPercentageWidth = this.progressPercentage + '%';
         },
         start: function() {
             var chapter = this.chapters[this.selectedChapterIndex];

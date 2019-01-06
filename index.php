@@ -16,31 +16,44 @@ require_once 'init.php';
     </head>
     <body>
         <div id="app" class="container-fluid mt-3">
+
             <div v-if="currentScreen === constants.SCREENS.START">
-                <form>
-                    <div class="form-group">
-                        <select v-model="selectedChapterIndex" class="form-control">
-                            <option v-for="(chapter, index) in chapters" v-bind:value="index">
-                                {{ chapter.title }} ({{ chapter.sentences.length }} zinnen)
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-check">
-                        <input
-                            type="checkbox"
-                            v-model="showSpecialCharacterButtons"
-                            class="form-check-input"
-                            id="checkSpecialCharacters"
-                        >
-                        <label class="form-check-label" for="checkSpecialCharacters">
-                            Knoppen voor speciale karakters
-                        </label>
-                    </div>
-                    <button v-on:click="start()" class="btn btn-primary mt-3">Start</button>
-                </form>
+                <div class="form-group">
+                    <select v-model="selectedChapterIndex" class="form-control">
+                        <option v-for="(chapter, index) in chapters" v-bind:value="index">
+                            {{ chapter.title }} ({{ chapter.sentences.length }} zinnen)
+                        </option>
+                    </select>
+                </div>
+                <div class="form-check">
+                    <input
+                        type="checkbox"
+                        v-model="showSpecialCharacterButtons"
+                        class="form-check-input"
+                        id="checkSpecialCharacters"
+                    >
+                    <label class="form-check-label" for="checkSpecialCharacters">
+                        Toon knoppen voor speciale karakters
+                    </label>
+                </div>
+                <button v-on:click="start()" class="btn btn-primary mt-3">Start</button>
             </div>
+
             <div v-if="currentScreen === constants.SCREENS.QUESTION">
                 <div v-html="notice"></div>
+                <div class="progress mb-1">
+                    <div
+                        v-bind:aria-valuenow="progressPercentage"
+                        v-bind:style="{ width: progressPercentageWidth }"
+                        class="progress-bar bg-info"
+                        role="progressbar"
+                        style="width: 33%;"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                    >
+                        {{ progressPercentage }}%
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col">
                         <h4>{{ sentences[currentItemIndex]['nl'] }}</h4>
@@ -84,6 +97,7 @@ require_once 'init.php';
                     </div>
                 </div>
             </div>
+
             <div v-if="currentScreen === constants.SCREENS.END">
                 <div v-html="notice"></div>
                 <div class="row">
@@ -98,6 +112,7 @@ require_once 'init.php';
                     </div>
                 </div>
             </div>
+
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
