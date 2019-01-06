@@ -17,20 +17,27 @@ require_once 'init.php';
     <body>
         <div id="app" class="container-fluid mt-3">
             <div v-if="currentScreen === constants.SCREENS.START">
-                <div class="row">
-                    <div class="col">
+                <form>
+                    <div class="form-group">
                         <select v-model="selectedChapterIndex" class="form-control">
                             <option v-for="(chapter, index) in chapters" v-bind:value="index">
                                 {{ chapter.title }} ({{ chapter.sentences.length }} zinnen)
                             </option>
                         </select>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <button v-on:click="start()" class="btn btn-primary mt-3">Start</button>
+                    <div class="form-check">
+                        <input
+                            type="checkbox"
+                            v-model="showSpecialCharacterButtons"
+                            class="form-check-input"
+                            id="checkSpecialCharacters"
+                        >
+                        <label class="form-check-label" for="checkSpecialCharacters">
+                            Knoppen voor speciale karakters
+                        </label>
                     </div>
-                </div>
+                    <button v-on:click="start()" class="btn btn-primary mt-3">Start</button>
+                </form>
             </div>
             <div v-if="currentScreen === constants.SCREENS.QUESTION">
                 <div v-html="notice"></div>
@@ -52,7 +59,7 @@ require_once 'init.php';
                         </h4>
                     </div>
                 </div>
-                <div class="row">
+                <div v-if="showSpecialCharacterButtons" class="row">
                     <div class="col">
                         <button
                             v-for="specialCharacter in specialCharacters"

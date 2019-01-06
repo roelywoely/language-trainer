@@ -17,6 +17,7 @@ var app = new Vue({
         notice: '',
         selectedChapterIndex: null,
         sentences: [],
+        showSpecialCharacterButtons: null,
         specialCharacters: ['ü', 'ä', 'ö', 'ß']
     },
     created: function() {
@@ -66,6 +67,7 @@ var app = new Vue({
                 this.currentScreen = this.constants.SCREENS.QUESTION;
                 this.sentences = chapter['sentences'];
             }
+            return false;
         },
         toStartScreen: function() {
             this.selectedChapterIndex = null;
