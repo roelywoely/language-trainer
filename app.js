@@ -48,7 +48,6 @@ var app = new Vue({
             }
             this.answer = '';
 
-
             if (typeof this.sentences[this.currentItemIndex + 1] == 'undefined') {
                 this.end();
             } else {
@@ -58,13 +57,16 @@ var app = new Vue({
             }
         },
         reset: function() {
-            this.selectedChapterIndex = null;
-            this.currentScreen = this.constants.SCREENS.START;
-            this.notice = '';
             this.countCorrect = 0;
             this.countWrong = 0;
+            this.currentItemIndex = 0;
+            this.currentScreen = this.constants.SCREENS.START;
+            this.notice = '';
             this.progressPercentage = 0;
-            this.progressPercentageWidth = this.progressPercentage + '%';
+            this.progressPercentageWidth = '0%';
+            this.selectedChapterIndex = null;
+            this.sentences = [];
+            this.showSpecialCharacterButtons = null;
         },
         start: function() {
             var chapter = this.chapters[this.selectedChapterIndex];
