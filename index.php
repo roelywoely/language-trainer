@@ -34,7 +34,14 @@ require_once 'init.php';
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h4><input type="text" v-model="answer" class="form-control form-control-lg"></h4>
+                        <h4>
+                            <input
+                                type="text"
+                                v-model="answer"
+                                v-on:keyup.enter="next()"
+                                class="form-control form-control-lg"
+                            >
+                        </h4>
                     </div>
                 </div>
                 <div class="row">
@@ -51,7 +58,9 @@ require_once 'init.php';
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button v-on:click="next()" class="btn btn-primary btn-lg mt-3">Antwoord controleren</button>
+                        <button v-on:click="next()" class="btn btn-primary btn-lg mt-3">
+                            Antwoord controleren
+                        </button>
                     </div>
                 </div>
                 <div class="row">
