@@ -29,6 +29,7 @@ var app = new Vue({
     methods: {
         addCharacter: function(character) {
             this.answer += character;
+            $('#answer').focus();
         },
         end: function() {
             this.currentScreen = this.constants.SCREENS.END;

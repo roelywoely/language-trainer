@@ -5,7 +5,12 @@ require_once 'init.php';
 <html>
     <head>
         <title>Language trainer</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+            integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+            crossorigin="anonymous"
+        >
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     </head>
@@ -15,7 +20,9 @@ require_once 'init.php';
                 <div class="row">
                     <div class="col">
                         <select v-model="selectedChapterIndex" class="form-control">
-                            <option v-for="(chapter, index) in chapters" v-bind:value="index">{{ chapter.title }}</option>
+                            <option v-for="(chapter, index) in chapters" v-bind:value="index">
+                                {{ chapter.title }}
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -40,6 +47,7 @@ require_once 'init.php';
                                 v-model="answer"
                                 v-on:keyup.enter="next()"
                                 class="form-control form-control-lg"
+                                id="answer"
                             >
                         </h4>
                     </div>
