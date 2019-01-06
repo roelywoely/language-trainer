@@ -36,12 +36,23 @@ require_once 'init.php';
                         Toon knoppen voor speciale karakters
                     </label>
                 </div>
+                <div class="form-check">
+                    <input
+                        type="checkbox"
+                        v-model="showProgressBar"
+                        class="form-check-input"
+                        id="checkProgressBar"
+                    >
+                    <label class="form-check-label" for="checkProgressBar">
+                        Toon voortgang
+                    </label>
+                </div>
                 <button v-on:click="start()" class="btn btn-primary mt-3">Start</button>
             </div>
 
             <div v-if="currentScreen === constants.SCREENS.QUESTION">
                 <div v-html="notice"></div>
-                <div class="progress mb-1">
+                <div v-if="showProgressBar" class="progress mb-1">
                     <div
                         v-bind:aria-valuenow="progressPercentage"
                         v-bind:style="{ width: progressPercentageWidth }"

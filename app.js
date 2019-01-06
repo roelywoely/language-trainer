@@ -19,7 +19,8 @@ var app = new Vue({
         progressPercentageWidth: '0%',
         selectedChapterIndex: null,
         sentences: [],
-        showSpecialCharacterButtons: null,
+        showProgressBar: true,
+        showSpecialCharacterButtons: false,
         specialCharacters: ['ü', 'ä', 'ö', 'ß', 'Ü', 'Ä', 'Ö']
     },
     created: function() {
@@ -66,7 +67,8 @@ var app = new Vue({
             this.progressPercentageWidth = '0%';
             this.selectedChapterIndex = null;
             this.sentences = [];
-            this.showSpecialCharacterButtons = null;
+            this.showProgressBar = true;
+            this.showSpecialCharacterButtons = false;
         },
         start: function() {
             var chapter = this.chapters[this.selectedChapterIndex];
